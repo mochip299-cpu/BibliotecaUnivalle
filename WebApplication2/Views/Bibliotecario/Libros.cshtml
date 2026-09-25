@@ -1,0 +1,23 @@
+@model IEnumerable<WebApplication2.Models.Libro>
+@{
+    ViewData["Title"] = "Libros";
+}
+
+<h2>📚 Catálogo de Libros</h2>
+<table class="table table-bordered table-hover">
+    <thead class="table-dark">
+        <tr><th>Título</th><th>Autor</th><th>ISBN</th><th>Stock</th></tr>
+    </thead>
+    <tbody>
+        @foreach (var libro in Model)
+        {
+            <tr>
+                <td>@libro.Titulo</td>
+                <td>@libro.Autor</td>
+                <td>@libro.ISBN</td>
+                <td>@libro.Stock</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a asp-action="Index" class="btn btn-secondary">← Volver</a>

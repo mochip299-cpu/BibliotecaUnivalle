@@ -1,0 +1,28 @@
+@{
+    ViewData["Title"] = "Dashboard - Bibliotecario";
+}
+
+<h2>📚 Dashboard del Bibliotecario</h2>
+<p class="text-muted">Bienvenido, <strong>@User.Identity?.Name</strong></p>
+
+<div class="row g-4 mb-4">
+    <div class="col-md-4">
+        <div class="card text-white bg-primary">
+            <div class="card-body text-center">
+                <h3>@ViewBag.TotalLibros</h3>
+                <p class="mb-0">📚 Libros registrados</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-white bg-danger">
+            <div class="card-body text-center">
+                <h3>@ViewBag.PrestamosActivos</h3>
+                <p class="mb-0">📋 Préstamos activos</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<a asp-action="Libros"   class="btn btn-outline-primary me-2">📚 Ver Libros</a>
+<a asp-action="Prestamos" class="btn btn-outline-warning">📋 Ver Préstamos</a>

@@ -1,0 +1,20 @@
+@{
+    ViewData["Title"] = "Dashboard - Usuario";
+}
+
+<h2>👤 Mi Dashboard</h2>
+<p class="text-muted">Bienvenido, <strong>@User.Identity?.Name</strong></p>
+
+<div class="row g-4 mb-4">
+    <div class="col-md-4">
+        <div class="card text-white bg-danger">
+            <div class="card-body text-center">
+                <h3>@ViewBag.MisPrestamos</h3>
+                <p class="mb-0">📋 Mis préstamos activos</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<a asp-action="Catalogo"     class="btn btn-outline-primary me-2">📚 Ver Catálogo</a>
+<a asp-action="MisPrestamos" class="btn btn-outline-warning">📋 Mis Préstamos</a>
