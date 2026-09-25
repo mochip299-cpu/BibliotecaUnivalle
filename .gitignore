@@ -1,0 +1,9 @@
+## .gitignore para ASP.NET Core
+*.user
+*.suo
+.vs/
+bin/
+obj/
+*.db
+*.db-shm
+*.db-wal

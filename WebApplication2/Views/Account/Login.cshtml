@@ -1,0 +1,94 @@
+@model WebApplication2.Models.LoginViewModel
+@{
+    ViewData["Title"] = "Iniciar Sesión";
+    Layout = null; // Sin layout para la pantalla de login
+}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - Biblioteca Univalle Sucre</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <style>
+        body {
+            background-color: #f0f2f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        .login-card {
+            width: 100%;
+            max-width: 420px;
+            padding: 2rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        .login-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .login-header h4 {
+            color: #2c3e50;
+            font-weight: 700;
+        }
+        .login-header p {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+        .btn-login {
+            background-color: #2c3e50;
+            border: none;
+            width: 100%;
+            padding: 0.6rem;
+        }
+        .btn-login:hover {
+            background-color: #1a252f;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-card">
+        <div class="login-header">
+            <h4>📚 Biblioteca</h4>
+            <p>Universidad Privada del Valle - Sucre</p>
+        </div>
+
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div class="alert alert-danger" role="alert">
+                @Html.ValidationSummary(false)
+            </div>
+        }
+
+        <form asp-action="Login" asp-controller="Account" method="post">
+            @Html.AntiForgeryToken()
+            <div class="mb-3">
+                <label asp-for="Email" class="form-label">Correo electrónico</label>
+                <input asp-for="Email" class="form-control" placeholder="correo@univalle.edu.bo" />
+                <span asp-validation-for="Email" class="text-danger small"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Password" class="form-label">Contraseña</label>
+                <input asp-for="Password" class="form-control" placeholder="••••••••" />
+                <span asp-validation-for="Password" class="text-danger small"></span>
+            </div>
+            <button type="submit" class="btn btn-primary btn-login">Ingresar</button>
+        </form>
+
+        <hr />
+        <p class="text-muted small text-center mt-2">
+            <strong>Usuarios de prueba:</strong><br />
+            admin@univalle.edu.bo / admin123<br />
+            biblio@univalle.edu.bo / biblio123<br />
+            juan@univalle.edu.bo / juan123
+        </p>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"></script>
+</body>
+</html>
