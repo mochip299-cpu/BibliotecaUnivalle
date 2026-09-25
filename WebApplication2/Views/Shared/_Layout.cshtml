@@ -1,9 +1,9 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - WebApplication2</title>
+    <title>@ViewData["Title"] - Biblioteca Univalle Sucre</title>
     <script type="importmap"></script>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
@@ -11,36 +11,45 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-dark bg-dark border-bottom mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">WebApplication2</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                <a class="navbar-brand" href="#">📚 Biblioteca Univalle</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Home" asp-action="Index">Inicio</a>
-                        </li>
+                        @if (User.IsInRole("Administrador"))
+                        {
+                            <li class="nav-item"><a class="nav-link text-white" asp-controller="Admin" asp-action="Index">Dashboard</a></li>
+                            <li class="nav-item"><a class="nav-link text-white" asp-controller="Admin" asp-action="Libros">Libros</a></li>
+                            <li class="nav-item"><a class="nav-link text-white" asp-controller="Admin" asp-action="Usuarios">Usuarios</a></li>
+                            <li class="nav-item"><a class="nav-link text-white" asp-controller="Admin" asp-action="Prestamos">Préstamos</a></li>
+                        }
+                        else if (User.IsInRole("Bibliotecario"))
+                        {
+                            <li class="nav-item"><a class="nav-link text-white" asp-controller="Bibliotecario" asp-action="Index">Dashboard</a></li>
+                            <li class="nav-item"><a class="nav-link text-white" asp-controller="Bibliotecario" asp-action="Libros">Libros</a></li>
+                            <li class="nav-item"><a class="nav-link text-white" asp-controller="Bibliotecario" asp-action="Prestamos">Préstamos</a></li>
+                        }
+                        else if (User.IsInRole("Usuario"))
+                        {
+                            <li class="nav-item"><a class="nav-link text-white" asp-controller="Usuario" asp-action="Index">Dashboard</a></li>
+                            <li class="nav-item"><a class="nav-link text-white" asp-controller="Usuario" asp-action="Catalogo">Catálogo</a></li>
+                            <li class="nav-item"><a class="nav-link text-white" asp-controller="Usuario" asp-action="MisPrestamos">Mis Préstamos</a></li>
+                        }
                     </ul>
                     <ul class="navbar-nav">
                         @if (User.Identity?.IsAuthenticated == true)
                         {
                             <li class="nav-item d-flex align-items-center me-3">
-                                <span class="text-muted small">@User.Identity.Name (@User.FindFirst(System.Security.Claims.ClaimTypes.Role)?.Value)</span>
+                                <span class="text-white-50 small">@User.Identity.Name</span>
                             </li>
                             <li class="nav-item">
-                                <form asp-controller="Account" asp-action="Logout" method="post" class="d-inline">
+                                <form asp-controller="Account" asp-action="Logout" method="post">
                                     @Html.AntiForgeryToken()
-                                    <button type="submit" class="btn btn-sm btn-outline-danger">Cerrar sesión</button>
+                                    <button type="submit" class="btn btn-sm btn-outline-light">Cerrar sesión</button>
                                 </form>
-                            </li>
-                        }
-                        else
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="Account" asp-action="Login">Iniciar sesión</a>
                             </li>
                         }
                     </ul>
@@ -48,17 +57,19 @@
             </div>
         </nav>
     </header>
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2026 - WebApplication2 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <footer class="border-top footer text-muted mt-4">
+        <div class="container text-center py-2">
+            &copy; 2026 - Universidad Privada del Valle - Sede Sucre
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
