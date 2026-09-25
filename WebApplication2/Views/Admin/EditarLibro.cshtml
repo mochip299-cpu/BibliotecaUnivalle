@@ -1,0 +1,28 @@
+@model WebApplication2.Models.Libro
+@{
+    ViewData["Title"] = "Editar Libro";
+}
+
+<h2>✏️ Editar Libro</h2>
+<form asp-action="EditarLibro" method="post">
+    @Html.AntiForgeryToken()
+    <input asp-for="Id" type="hidden" />
+    <div class="mb-3">
+        <label asp-for="Titulo" class="form-label"></label>
+        <input asp-for="Titulo" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="Autor" class="form-label"></label>
+        <input asp-for="Autor" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="ISBN" class="form-label"></label>
+        <input asp-for="ISBN" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="Stock" class="form-label"></label>
+        <input asp-for="Stock" class="form-control" type="number" />
+    </div>
+    <button type="submit" class="btn btn-warning">Actualizar</button>
+    <a asp-action="Libros" class="btn btn-secondary">Cancelar</a>
+</form>

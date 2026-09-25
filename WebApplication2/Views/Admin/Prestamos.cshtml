@@ -1,0 +1,36 @@
+@model IEnumerable<WebApplication2.Models.Prestamo>
+@{
+    ViewData["Title"] = "Préstamos";
+}
+
+<h2>📋 Gestión de Préstamos</h2>
+<table class="table table-bordered table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th><th>Usuario</th><th>Libro</th><th>Fecha Préstamo</th><th>Fecha Devolución</th><th>Estado</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var p in Model)
+        {
+            <tr>
+                <td>@p.Id</td>
+                <td>@p.Usuario?.Nombre</td>
+                <td>@p.Libro?.Titulo</td>
+                <td>@p.FechaPrestamo.ToString("dd/MM/yyyy")</td>
+                <td>@(p.FechaDevolucion?.ToString("dd/MM/yyyy") ?? "-")</td>
+                <td>
+                    @if (p.Estado == "Activo")
+                    {
+                        <span class="badge bg-danger">Activo</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-success">Devuelto</span>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a asp-action="Index" class="btn btn-secondary">← Volver</a>
